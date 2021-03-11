@@ -95,7 +95,6 @@ export default {
           });
         }
       });
-      console.log(crumbs, "check")
       return crumbs;
     }
   }

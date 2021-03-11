@@ -19,7 +19,9 @@ export default {
   css: [
     'ant-design-vue/dist/antd.css'
   ],
-
+  router: {
+    middleware: ['loadExternalJS', 'auth',]
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui'
@@ -34,6 +36,13 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    [
+      'vue-sweetalert2/nuxt',
+      {
+        confirmButtonColor: '#41b882',
+        cancelButtonColor: '#ff7674'
+      }
+    ]
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

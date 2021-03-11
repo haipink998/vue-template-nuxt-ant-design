@@ -8,54 +8,38 @@
         Login
       </h4>
       <!-- FORM LOGIN -->
-      <a-form class="login-form-form" layout="vertical" :form="form" @submit="handleSubmit">
-        <a-form-item
-          :validate-status="userNameError() ? 'error' : ''"
-          :help="userNameError() || ''"
-        >
-          <a-input
-            v-decorator="[
-              'phonenumber',
-              {
-                rules: [
-                  { required: true, message: 'Please input your Phone Number!' }
-                ]
-              }
-            ]"
-            placeholder="Phone Number"
-          >
-            <a-icon slot="prefix" type="phone" style="color:rgba(0,0,0,.25)" />
+      <a-form-model
+        layout="vertical"
+        :model="formInline"
+        @submit.prevent="login"
+        @submit="handleSubmit"
+        @submit.native.prevent
+        class="login-form-form"
+      >
+        <a-form-model-item>
+          <a-input v-model="formInline.username" placeholder="Username">
+            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
           </a-input>
-        </a-form-item>
-        <a-form-item
-          :validate-status="passwordError() ? 'error' : ''"
-          :help="passwordError() || ''"
-        >
+        </a-form-model-item>
+        <a-form-model-item>
           <a-input
-            v-decorator="[
-              'password',
-              {
-                rules: [
-                  { required: true, message: 'Please input your Password!' }
-                ]
-              }
-            ]"
+            v-model="formInline.password"
             type="password"
             placeholder="Password"
           >
             <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
           </a-input>
-        </a-form-item>
-        <a-form-item>
+        </a-form-model-item>
+        <a-form-model-item>
           <a-button
             type="primary"
             html-type="submit"
-            :disabled="hasErrors(form.getFieldsError())"
+            :disabled="formInline.username === '' || formInline.password === ''"
           >
             Log in
           </a-button>
-        </a-form-item>
-      </a-form>
+        </a-form-model-item>
+      </a-form-model>
       <!--  -->
       <div class="login-form-footer">
         <p>Design By ABC</p>
@@ -65,51 +49,60 @@
 </template>
 
 <script>
+import mutationTypes from "~/constants/mutationTypes";
+import { Alert } from "~/node_modules/ant-design-vue/lib";
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 export default {
   layout: "empty",
-  
-   data() {
+
+  data() {
     return {
       hasErrors,
-      form: this.$form.createForm(this, { name: 'horizontal_login' }),
+      formInline: {
+        username: "",
+        password: ""
+      }
     };
   },
-  mounted() {
-    this.$nextTick(() => {
-      // To disabled submit button at the beginning.
-      this.form.validateFields();
-    });
-  },
+  mounted() {},
   methods: {
-    // Only show error after a field is touched.
-    userNameError() {
-      const { getFieldError, isFieldTouched } = this.form;
-      return isFieldTouched('phonenumber') && getFieldError('phonenumber');
-    },
-    // Only show error after a field is touched.
-    passwordError() {
-      const { getFieldError, isFieldTouched } = this.form;
-      return isFieldTouched('password') && getFieldError('password');
-    },
     handleSubmit(e) {
-      e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-        }
-      });
+      console.log(this.formInline);
     },
-  },
+    async login() {
+      try {
+        const res = await this.$store.dispatch(mutationTypes.AUTH.LOGIN, {
+          username: this.formInline.username,
+          password: this.formInline.password
+        });
+        if (res) {
+           this.$swal({
+            icon: "success",
+            title: "Success",
+            text: "Enjoy your life",
+            timer: 1000
+          });
+          setTimeout(() => {this.$router.push("/")}, 1000)
+          
+        } else {
+          this.$swal({
+            icon: "error",
+            title: "You have some wrong",
+            text: "Wrong password or account.",
+            timer: 2000
+          });
+        }
+      } catch (e) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 
-<style>
-body{
-  background: #f3efe8;
-}
+<style scoped>
 .container {
   box-sizing: border-box;
   background: #f3efe8;
@@ -156,11 +149,12 @@ body{
 .login-form-form {
   padding: 20px 80px;
 }
-.login-form-footer{
-  margin-top:20px;
+.login-form-footer {
+  margin-top: 20px;
   font-weight: 300;
-}.login-form-footer p{
-  margin-top:0;
+}
+.login-form-footer p {
+  margin-top: 0;
   margin-bottom: 1rem;
   display: block;
   width: 100%;
