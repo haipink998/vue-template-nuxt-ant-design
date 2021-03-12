@@ -1,4 +1,5 @@
 export default {
+  mode: 'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Adiary-Vuex-Nuxt-AntDesign',
@@ -20,8 +21,9 @@ export default {
     'ant-design-vue/dist/antd.css'
   ],
   router: {
-    middleware: ['loadExternalJS', 'auth',]
+    middleware: ['loadExternalJS', 'check-auth', 'auth', 'get-user',]
   },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui'
@@ -32,7 +34,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-  ],
+  ],axios: {
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

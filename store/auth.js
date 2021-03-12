@@ -1,6 +1,6 @@
 import httpMethod from "~/services/httpMethod";
-import mutationTypes from "../constants/mutationTypes";
-import authServices from "../services/authServices";
+import mutationTypes from "~/constants/mutationTypes";
+import authServices from "~/services/authServices";
 
 /**
  * initial state

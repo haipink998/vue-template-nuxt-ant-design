@@ -29,7 +29,7 @@
               >
             </a-menu-item>
             <a-menu-item>
-              <a href="javascript:;" class="btn-menu-item"
+              <a @click="logout" href="javascript:;" class="btn-menu-item"
                 ><a-icon type="export" /> Logout</a
               >
             </a-menu-item>
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import mutationTypes from '~/constants/mutationTypes';
 
 export default {
   props: {
@@ -74,7 +75,11 @@ export default {
   },
    methods: {
     onSearch(value) {
-      console.log(value);
+      
+    },
+    async logout() {
+      const res = await this.$store.dispatch(`auth/${mutationTypes.AUTH.LOGOUT}`);
+      this.$router.push('/login');
     },
   },
   computed: {

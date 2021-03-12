@@ -17,13 +17,14 @@
         class="login-form-form"
       >
         <a-form-model-item>
-          <a-input v-model="formInline.username" placeholder="Username">
+          <a-input v-model="formInline.username" allow-clear placeholder="Username">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-form-model-item>
         <a-form-model-item>
           <a-input
             v-model="formInline.password"
+            allow-clear
             type="password"
             placeholder="Password"
           >
