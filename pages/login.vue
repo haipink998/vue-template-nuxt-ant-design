@@ -70,7 +70,6 @@ export default {
   mounted() {},
   methods: {
     handleSubmit(e) {
-      console.log(this.formInline);
     },
     async login() {
       try {

@@ -2,203 +2,43 @@
   <div class="content">
     <a-row class="wrapper" :gutter="[32, 8]">
       <!-- INFOMATION -->
-        <a-col class="ant-col ant-col-md-24 ant-col-lg-7 wrapper-infomation">
-          <a-card class="mom-infomation" hoverable>
-            <img class="user-avatar" src="img/custom-logo.jpg" alt="" />
-            <div class="user-name">
-              <h1>User Name</h1>
-              <p>Mom</p>
-            </div>
-            <div class="user-detail">
-              <p><a-icon type="mail" />Mail</p>
-              <p><a-icon type="contacts" />Age</p>
-              <p><a-icon type="environment" />Location</p>
-            </div>
-          </a-card>
+      <a-col class="ant-col ant-col-md-24 ant-col-lg-7 wrapper-infomation">
+        <a-card class="mom-infomation" hoverable>
+          <img class="user-avtar" :src="userAvatar" alt="" />
+          <img class="user-avatar" src="img/custom-logo.jpg" alt="" />
+          <div class="user-name">
+            <h1>{{ userInfo.first_name }} {{ userInfo.last_name }}</h1>
+            <p>Mom</p>
+          </div>
+          <div class="user-detail">
+            <p><a-icon type="mail" />{{ userInfo.email }}</p>
+            <p><a-icon type="contacts" />{{ userInfoUserProfile.age }}</p>
+            <p>
+              <a-icon type="environment" />{{ userInfoUserProfile.address }}
+            </p>
+          </div>
+        </a-card>
 
-          <a-card class="son-infomation" hoverable>
-            <img class="user-avatar" src="img/custom-logo.jpg" alt="" />
-            <div class="user-name">
-              <h1>Son Name</h1>
-              <p>Son</p>
-            </div>
-            <div class="user-detail">
-              <p><a-icon type="user" />Gender</p>
-              <p><a-icon type="carry-out" />EDD</p>
-              <p><a-icon type="calendar" />Birthday</p>
-            </div>
-          </a-card>
-        </a-col>
+        <a-card class="son-infomation" hoverable>
+          <img class="user-avatar" src="img/custom-logo.jpg" alt="" />
+          <div class="user-name">
+            <h1>{{ children.name }}</h1>
+            <p>Son</p>
+          </div>
+          <div class="user-detail">
+            <p><a-icon type="user" />{{ gender }}</p>
+            <p><a-icon type="carry-out" />{{ children.edd }}</p>
+            <p><a-icon type="calendar" />{{ children.birthday }}</p>
+          </div>
+        </a-card>
+      </a-col>
       <!-- /INFOMATION -->
       <!-- EDIT INFOMATION -->
-        <a-col
-          class="want-col ant-col-md-24 ant-col-lg-17 wrapper-edit-infomation"
-        >
-          <template>
-            <a-card class="edit-infomation" title="Edit Infomation">
-              <!-- MOM EDIT -->
-              <div class="mom-edit">
-                <div class="header-text">
-                  <span class="header-text-title">
-                    Mom Edit
-                  </span>
-                  <span class="header-text-depcription">
-                    Enjoy the passion
-                  </span>
-                </div>
-                <div class="form-edit">
-                  <!--  -->
-                  <div class="form-edit-feild">
-                    <span class="form-edit-label">Email address</span>
-                    <a-input
-                      placeholder="input with clear icon"
-                      allow-clear
-                      @change="onChange"
-                    />
-                  </div>
-                  <!--  -->
-                  <!--  -->
-                  <div class="form-edit-feild gutter-example">
-                    <a-row :gutter="16">
-                      <a-col class="gutter-row" :span="9">
-                        <div class="gutter-box">
-                          <span class="form-edit-label">Name</span>
-                          <a-input
-                            placeholder="input with clear icon"
-                            allow-clear
-                            @change="onChange"
-                          />
-                        </div>
-                      </a-col>
-                      <a-col class="gutter-row" :span="9">
-                        <div class="gutter-box">
-                          <span class="form-edit-label">Last Name</span>
-                          <a-input
-                            placeholder="input with clear icon"
-                            allow-clear
-                            @change="onChange"
-                          />
-                        </div>
-                      </a-col>
-                      <a-col class="gutter-row" :span="6">
-                        <div class="gutter-box">
-                          <span class="form-edit-label">Age</span>
-                          <a-input-number
-                            :min="1"
-                            :max="100000"
-                            :default-value="3"
-                            @change="onChange"
-                          />
-                        </div>
-                      </a-col>
-                    </a-row>
-                  </div>
-                  <!--  -->
-                  <!--  -->
-                  <div class="form-edit-feild">
-                    <span class="form-edit-label">Note</span>
-                    <a-textarea
-                      placeholder="textarea with clear icon"
-                      allow-clear
-                      @change="onChange"
-                    />
-                  </div>
-                  <!--  -->
-                </div>
-              </div>
-            <!--  -->
-            <!-- SON EDIT -->
-              <div class="son-edit">
-                <!-- SON TITLE EDIT -->
-                  <div class="header-text">
-                    <span class="header-text-title">
-                      Son Edit
-                    </span>
-                    <span class="header-text-depcription">
-                      Enjoy the passion
-                    </span>
-                  </div>
-                <!-- /SON TITLE EDIT -->
-                <!-- FORM EDIT -->
-                  <div class="form-edit">
-                    <div class="form-edit-feild">
-                      <span class="form-edit-label">Son Name</span>
-                      <a-input
-                        placeholder="input with clear icon"
-                        allow-clear
-                        @change="onChange"
-                      />
-                    </div>
-                    <!--  -->
-                    <div class="form-edit-feild gutter-example">
-                      <a-row :gutter="16">
-                        <a-col class="gutter-row" :span="9">
-                          <div class="gutter-box">
-                            <span class="form-edit-label">Date Of Birth</span>
-                            <a-date-picker
-                              format="YYYY-MM-DD HH:mm:ss"
-                              :disabled-date="disabledDate"
-                              :disabled-time="disabledDateTime"
-                              :show-time="{
-                                defaultValue: moment('00:00:00', 'HH:mm:ss')
-                              }"
-                            />
-                          </div>
-                        </a-col>
-                        <a-col class="gutter-row" :span="9">
-                          <div class="gutter-box">
-                            <span class="form-edit-label">Edd</span>
-                            <a-date-picker
-                              format="YYYY-MM-DD HH:mm:ss"
-                              :disabled-date="disabledDate"
-                              :disabled-time="disabledDateTime"
-                              :show-time="{
-                                defaultValue: moment('00:00:00', 'HH:mm:ss')
-                              }"
-                            />
-                          </div>
-                        </a-col>
-                        <a-col class="gutter-row" :span="6">
-                          <div class="gutter-box">
-                            <span class="form-edit-label">Gender</span>
-                            <a-select
-                              label-in-value
-                              :default-value="{ key: 'Male' }"
-                              style="width: 120px"
-                              @change="handleChange"
-                            >
-                              <a-select-option value="Female">
-                                Female
-                              </a-select-option>
-                              <a-select-option value="Male">
-                                Male
-                              </a-select-option>
-                            </a-select>
-                          </div>
-                        </a-col>
-                      </a-row>
-                    </div>
-                    <!--  -->
-                    <!--  -->
-                    <div class="form-edit-feild">
-                      <span class="form-edit-label">Note</span>
-                      <a-textarea
-                        placeholder="textarea with clear icon"
-                        allow-clear
-                        @change="onChange"
-                      />
-                    </div>
-                    <!--  -->
-                  </div>
-                <!-- /FORM EDIT -->
-              </div>
-            <!-- /SONEDIT  -->
-            <a-button class="editable-add-btn" @click="handleAdd">
-              Thay Đổi
-            </a-button>
-            </a-card>
-          </template>
-        </a-col>
+      <a-col
+        class="want-col ant-col-md-24 ant-col-lg-17 wrapper-edit-infomation"
+      >
+        <EditInfomation :data="userInfo" :dataUser="userInfoUserProfile" :dataSon="userInfoUserChildren"/>
+      </a-col>
       <!-- /EDIT INFOMATION -->
     </a-row>
   </div>
@@ -206,58 +46,88 @@
 
 <script>
 import moment from "moment";
+import { typeGender } from "~/constants/index";
+import mutationTypes from '~/constants/mutationTypes';
+import EditInfomation from '~/components/editInfomation'
 export default {
-  methods: {
-    onChange(value) {
-      console.log("changed", value);
+  components: {
+    EditInfomation
+  },
+   watch: {
+    data: function(value) {
+      const cloneData = { ...value };
+      this.userInfo = cloneData;
     },
-    handleChange(value) {
-      console.log(value); // { key: "lucy", label: "Lucy (101)" }
+    dataUser: function(value) {
+      const cloneDataProfile = { ...value };
+      this.userInfoUserProfile = cloneDataProfile;
     },
-    moment,
-    range(start, end) {
-      const result = [];
-      for (let i = start; i < end; i++) {
-        result.push(i);
-      }
-      return result;
-    },
-
-    disabledDate(current) {
-      // Can not select days before today and today
-      return current && current < moment().endOf("day");
-    },
-
-    disabledDateTime() {
-      return {
-        disabledHours: () => this.range(0, 24).splice(4, 20),
-        disabledMinutes: () => this.range(30, 60),
-        disabledSeconds: () => [55, 56]
-      };
-    },
-
-    disabledRangeTime(_, type) {
-      if (type === "start") {
-        return {
-          disabledHours: () => this.range(0, 60).splice(4, 20),
-          disabledMinutes: () => this.range(30, 60),
-          disabledSeconds: () => [55, 56]
-        };
-      }
-      return {
-        disabledHours: () => this.range(0, 60).splice(20, 4),
-        disabledMinutes: () => this.range(0, 31),
-        disabledSeconds: () => [55, 56]
-      };
+    dataSon: function(value) {
+      const cloneDataProfile = { ...value };
+      this.children = cloneDataProfile;
     }
+  },
+    data: function() {
+    return {
+      inputValue: this.value
+    };
+  },
+   mounted() {
+    this.$watch(
+      "value",
+      value => {
+        this.inputValue = value;
+      },
+      { immediate: true }
+    );
+  },
+  methods: {
+    moment
+  },
+  computed: {
+    userInfo: function() {
+      return this.$store.getters["user/getUserInfo"] || {};
+    },
+    userInfoUserProfile: function() {
+      const userInfo = this.$store.getters["user/getUserInfo"];
+      return userInfo?.user_profile || {};
+    },
+    children: function() {
+      const userInfo = this.$store.getters["user/getUserInfo"];
+      return userInfo?.user_children?.[0] || {};
+    },
+      userInfoUserChildren: function() {
+      const userInfo = this.$store.getters["user/getUserInfo"];
+      return userInfo?.user_children?.[0] || {};
+    },
+    userAvatar: function() {
+      return (
+        this.$store.getters["user/getUserInfo"]?.user_profile
+          ?.profile_picture || null
+      );
+    },
+    gender: function() {
+      const userInfo = this.$store.getters["user/getUserInfo"];
+      if (userInfo) {
+        const gender = userInfo.user_profile.gender;
+        return typeGender[gender];
+      }
+      return null;
+    },
+    userId: function() {
+      return this.$store.getters["auth/getIdOfUser"];
+    },
+    optionsGenderLocal: function() {
+      return optionsGender;
+    }
+
   }
 };
 </script>
 
 <style>
-
-.wrapper .ant-col{
-  padding-right: 0 !important
+.wrapper .ant-col {
+  padding-right: 0 !important;
 }
 .wrapper-infomation {
   font-size: 14px;
@@ -298,7 +168,6 @@ export default {
 }
 .user-detail {
   padding-top: 32px;
-  padding-left: 32px;
   border-top: 1px solid rgba(0, 0, 0, 0.09);
 }
 .user-detail p {
@@ -337,9 +206,6 @@ export default {
 .form-edit-feild {
   padding: 15px 0;
 }
-.form-edit-feild .ant-input,.form-edit-feild .ant-select,.form-edit-feild .ant-input-number{
-  margin-top: 10px;
-  }
 
 /*  */
 .gutter-example >>> .ant-row > div {

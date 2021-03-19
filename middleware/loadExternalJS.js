@@ -3,7 +3,7 @@ export default (context) => {
   app.head.script = [
     ...context.app.head.script,
     {
-      src: 'js/test.js'
+      src: '/js/test.js'
     }
   ];
 }

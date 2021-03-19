@@ -12,10 +12,10 @@
 export default {
   methods: {
     onCollapse(collapsed, type) {
-      console.log(collapsed, type);
+      
     },
     onBreakpoint(broken) {
-      console.log(broken);
+     
     }
   }
 };
