@@ -9,5 +9,7 @@ export default {
   DIARY_URL: `${rootUrl}/diary/`,
   NEWS_URL: `${rootUrl}/news/`,
   TEMPLATE_URL: `${rootUrl}/template/`,
-  REPORT_URL: `${rootUrl}/report/?children_milk_by=day&mother_milk_by=day&type=weight `
+  REPORT_WEIGHT: `${rootUrl}/report/?children_milk_by=day&mother_milk_by=day&type=weight `,
+  REPORT_HEIGHT: `${rootUrl}/report/?children_milk_by=day&mother_milk_by=day&type=height `,
+  ACTION_URL: `${rootUrl}/action/`
 }

@@ -5,7 +5,9 @@ class DiaryServices {
   getDiary() {
     return httpMethod.get(`${apis.DIARY_URL}`);
   }
-
+  getAction() {
+    return httpMethod.get(`${apis.ACTION_URL}`);
+  }
   getDiarySon({ id }) {
     return httpMethod.get(`${apis.DIARY_URL}?children=${id}`);
   }

@@ -359,15 +359,14 @@ export default {
       const res = this.diaryList[0]?.end_time;
       return res;
     },
-    userId: function() {
-      return this.$store.getters["auth/getIdOfUser"];
-    }
+ 
   }
 };
 </script>
 <style scoped>
-.editable-row-operations a {
-  margin-right: 8px;
+.editable-row-operations {
+  display: flex;
+  justify-content: center;
 }
 
 .table-list-button {
@@ -382,10 +381,5 @@ export default {
   color: rgba(0, 0, 0, 0.85);
   font-weight: 500;
   font-size: 16px;
-}
-.editable-add-btn {
-  background: #24b314;
-  color: white;
-  align-items: center;
 }
 </style>

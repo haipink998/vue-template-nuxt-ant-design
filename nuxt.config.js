@@ -13,7 +13,15 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    script: [
+      {
+        src: 'https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js', body:true
+      },
+      {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js', body:true
+      }
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

@@ -96,9 +96,9 @@ export default {
       const userInfo = this.$store.getters["user/getUserInfo"];
       return userInfo?.user_children?.[0] || {};
     },
-      userInfoUserChildren: function() {
-      const userInfo = this.$store.getters["user/getUserInfo"];
-      return userInfo?.user_children?.[0] || {};
+    userInfoUserChildren: function() {
+    const userInfo = this.$store.getters["user/getUserInfo"];
+    return userInfo?.user_children?.[0] || {};
     },
     userAvatar: function() {
       return (

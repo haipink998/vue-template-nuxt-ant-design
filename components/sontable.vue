@@ -676,8 +676,9 @@ export default {
   width: 33%;
   align-items: center;
 }
-.editable-row-operations a {
-  margin-right: 8px;
+.editable-row-operations {
+  display: flex;
+  justify-content: center;
 }
 
 .table-list-button {

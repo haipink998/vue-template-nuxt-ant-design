@@ -6,15 +6,27 @@ const state = () => ({
   diaryList: null,
   diaryListSon: [],
   Action: null,
+  actionList: null,
 });
 
 const getters = {
   getDiaryList: state => state.diaryList,
   diaryListSon: state => state.diaryListSon,
   diaryReadTable: state => state.Action,
+  getActionList: state => state.actionList,
 };
 
 const actions = {
+  async getAction({commit}){
+    try {
+      const res = await diaryServices.getAction();
+      const {data} = res;
+      commit(mutationTypes.USER.GET_ACTION, data);
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  },
   async getDiary({ commit }) {
     try {
       const res = await diaryServices.getDiary();
@@ -82,6 +94,9 @@ const actions = {
   
 }
 const mutations = {
+  [mutationTypes.USER.GET_ACTION](state, payload) {
+    state.actionList = payload;
+  },
   [mutationTypes.USER.GET_DIARY](state, payload) {
     state.diaryList = payload;
   },
